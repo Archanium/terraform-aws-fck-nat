@@ -120,3 +120,9 @@ resource "aws_iam_role" "main" {
 
   tags = var.tags
 }
+
+resource "aws_iam_role_policy_attachment" "additional_iam_role" {
+  for_each   = var.additional_iam_roles
+  role       = aws_iam_role.main.name
+  policy_arn = each.value
+}
